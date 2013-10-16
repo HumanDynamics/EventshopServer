@@ -59,24 +59,30 @@ public class EmageBuilder {
 			int y = getYIndex(geoParams, currPoint);
 						
 			if (x>=0 && y >=0) {
-				switch (this.operator) {
-				case MAX:
-					valueGrid[x][y] = Math.max(valueGrid[x][y], currPoint.getValue());
-					break;
-				case MIN:
-					valueGrid[x][y] = Math.min(valueGrid[x][y], currPoint.getValue());
-					break;
-				case SUM:
-					valueGrid[x][y] += currPoint.getValue();
-					break;
-				case COUNT:
-					valueGrid[x][y]++;
-					break;
-				case AVG:
-					double total = valueGrid[x][y]*avgAssistGrid[x][y];
-					//Add one to the count from that cell, 
-					valueGrid[x][y] = (total+currPoint.getValue())/++avgAssistGrid[x][y];
-					break;
+				try {
+					switch (this.operator) {
+					case MAX:
+						valueGrid[x][y] = Math.max(valueGrid[x][y], currPoint.getValue());
+						break;
+					case MIN:
+						valueGrid[x][y] = Math.min(valueGrid[x][y], currPoint.getValue());
+						break;
+					case SUM:
+						valueGrid[x][y] += currPoint.getValue();
+						break;
+					case COUNT:
+						valueGrid[x][y]++;
+						break;
+					case AVG:
+						double total = valueGrid[x][y]*avgAssistGrid[x][y];
+						//Add one to the count from that cell, 
+						valueGrid[x][y] = (total+currPoint.getValue())/++avgAssistGrid[x][y];
+						break;
+					}
+				} catch (Exception e) {
+					//This should really be a logger
+					e.printStackTrace();
+					System.out.println("Caught an array index error due to a bug in either getXIndex or getYIndex and that shit really needs to get fixed!");
 				}
 			}
 		}

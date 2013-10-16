@@ -38,3 +38,6 @@
 //		System.out.println(recentEmage);
 //	}
 //}
+
+
+//curl --data 'NWlat=89.99&NWlong=-179.99&SElat=-89.99&SElong=179.99&resolutionX=60&resolutionY=30&source=source&theme=obama&wrapperType=TWITTER&operatorType=COUNT&pointPollingRateMS=500&emageCreationRateMS=7000&emageWindowLength=0' realyzer.media.mit.edu:8080/pipeline
