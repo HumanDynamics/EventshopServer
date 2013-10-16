@@ -38,6 +38,10 @@ public class Emage {
 		return this.valueGrid;
 	}
 	
+	public long getID() {
+		return this.emageUID;
+	}
+	
 	@Override
 	public String toString() {
 		String grid = "Emage data grid: \n";

@@ -32,11 +32,37 @@ public class StreamHandler {
 		//TODO: Probably need some sort of access control here or earlier
 		DataPipeline dp = this.dataPipelines.get(id);
 		if (dp != null) {
-			return dp.emageStream.getMostRecentEmage();
+			Emage emage = dp.emageStream.getMostRecentEmage();
+			checkForFailure(emage);
+			return emage;
 		} else {
 			throw new Exception();
 		}
 		
+	}
+	
+	private void checkForFailure(Emage emage) {
+		if (emage.getID() > 1 && isEmageEmpty(emage)) {
+			try {
+				System.out.println(getLatestPointsByPipelineID(0));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.exit(0);
+		}
+	}
+	
+	private boolean isEmageEmpty(Emage emage) {
+		double[][] valueGrid = emage.getValueGrid();
+		for (int i=0; i<valueGrid.length; i++) {
+			for (int j=0; j<valueGrid[0].length; j++){
+				if (valueGrid[i][j] != 0.0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 		
 	/**
