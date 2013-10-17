@@ -1,9 +1,11 @@
 package com.eventshop.backend;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.eventshop.server.Logger;
 import com.google.gson.Gson;
 
 /**
@@ -33,37 +35,37 @@ public class StreamHandler {
 		DataPipeline dp = this.dataPipelines.get(id);
 		if (dp != null) {
 			Emage emage = dp.emageStream.getMostRecentEmage();
-			checkForFailure(emage);
+			//checkForFailure(emage);
 			return emage;
 		} else {
 			throw new Exception();
 		}
 		
 	}
-	
-	private void checkForFailure(Emage emage) {
-		if (emage.getID() > 1 && isEmageEmpty(emage)) {
-			try {
-				System.out.println(getLatestPointsByPipelineID(0));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.exit(0);
-		}
-	}
-	
-	private boolean isEmageEmpty(Emage emage) {
-		double[][] valueGrid = emage.getValueGrid();
-		for (int i=0; i<valueGrid.length; i++) {
-			for (int j=0; j<valueGrid[0].length; j++){
-				if (valueGrid[i][j] != 0.0) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+//	
+//	private void checkForFailure(Emage emage) {
+//		if (emage.getID() > 1 && isEmageEmpty(emage)) {
+//			try {
+//				System.out.println(getLatestPointsByPipelineID(0));
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			System.exit(0);
+//		}
+//	}
+//	
+//	private boolean isEmageEmpty(Emage emage) {
+//		double[][] valueGrid = emage.getValueGrid();
+//		for (int i=0; i<valueGrid.length; i++) {
+//			for (int j=0; j<valueGrid[0].length; j++){
+//				if (valueGrid[i][j] != 0.0) {
+//					return false;
+//				}
+//			}
+//		}
+//		return true;
+//	}
 		
 	/**
 	 * Access point for the front end to get the most recent set of points from
@@ -207,7 +209,13 @@ public class StreamHandler {
 			@Override
 			public void run() {
 				while (true) {
-					System.out.println(p.emageStream.getNextEmage());
+					Emage emage = p.emageStream.getNextEmage();
+					try {
+						Logger.log(emage.toString());
+					} catch (IOException e) {
+						
+					}
+					System.out.println(emage);
 				}
 			}
 		});
