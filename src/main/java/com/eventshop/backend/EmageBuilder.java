@@ -80,9 +80,9 @@ public class EmageBuilder {
 						break;
 					}
 				} catch (Exception e) {
-					//This should really be a logger
-					e.printStackTrace();
-					System.out.println("Caught an array index error due to a bug in either getXIndex or getYIndex and that shit really needs to get fixed!");
+					System.out.println("Caught an array index error due to a bug");
+					System.out.println(currPoint);
+					System.out.println("x: "+x+", y: "+y);
 				}
 			}
 		}

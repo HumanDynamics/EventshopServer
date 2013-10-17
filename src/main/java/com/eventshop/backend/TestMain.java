@@ -39,5 +39,5 @@
 //	}
 //}
 
-
+//curl --data 'NWlat=42.368&NWlong=-71.089&SElat=42.359&SElong=-71.078&resolutionX=0.001&resolutionY=0.001&source=source&theme='sdkfljasdfasodansocaoif'&wrapperType=TWITTER&operatorType=COUNT&pointPollingRateMS=7000&emageCreationRateMS=600000&emageWindowLength=0' http://realyzer.media.mit.edu:8080/pipeline
 //curl --data 'NWlat=89.99&NWlong=-179.99&SElat=-89.99&SElong=179.99&resolutionX=60&resolutionY=30&source=source&theme=obama&wrapperType=TWITTER&operatorType=COUNT&pointPollingRateMS=500&emageCreationRateMS=7000&emageWindowLength=0' realyzer.media.mit.edu:8080/pipeline
